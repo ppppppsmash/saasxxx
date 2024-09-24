@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-
+import animatePlugin from "tailwindcss-animate";
 const config: Config = {
     darkMode: ["class"],
     content: [
@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
-  			background: 'hsl(var(--background))',
+  			background: 'var(--background)',
   			foreground: 'hsl(var(--foreground))',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
@@ -58,6 +58,6 @@ const config: Config = {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [animatePlugin],
 };
 export default config;

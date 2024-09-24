@@ -26,7 +26,7 @@ const PageHeader = () => {
               <SignInButton>
                 <Button
                   variant="outline"
-                  className="bg-black text-white rounded-xl"
+                  className="bg-black text-white"
                 >
                 Sign In
               </Button>
@@ -35,7 +35,7 @@ const PageHeader = () => {
               <SignUpButton>
                 <Button
                   variant="outline"
-                  className="bg-black text-white rounded-xl"
+                  className="bg-black text-white"
                 >
                   Sign Up
                 </Button>
