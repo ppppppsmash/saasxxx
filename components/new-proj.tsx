@@ -1,4 +1,6 @@
-import { Button } from '@/components/ui/button'
+import { createProject } from '@/app/actions/createProject';
+
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -7,12 +9,12 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogFooter
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
-import { Plus } from "lucide-react"
+import { Plus } from "lucide-react";
 
 const NewProjBtn = () => {
   return (
@@ -32,28 +34,29 @@ const NewProjBtn = () => {
           </DialogDescription>
         </DialogHeader>
 
-        <form className="flex gap-4 flex-col">
+        <form
+          className="flex gap-4 flex-col"
+          action={createProject}
+        >
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-2">
               <Label htmlFor="name">Name</Label>
-              <Input id="name" placeholder="Project Name" />
+              <Input id="name" name="name" placeholder="Project Name" />
             </div>
             
             <div className="flex flex-col gap-2">
               <Label htmlFor="url">URL</Label>
-              <Input id="url" placeholder="https://example.com" />
+              <Input id="url" name="url" placeholder="https://example.com" />
             </div>            
           </div>
 
           <div className="flex flex-col gap-2">
             <Label htmlFor="description">Description</Label>
-            <Textarea id="description" placeholder="Project Description (optional)" />
+            <Textarea id="description" name="description" placeholder="Project Description (optional)" />
           </div>
-        </form>
 
-        <DialogFooter>
-          <Button>Create Project</Button>
-        </DialogFooter>
+          <Button type="submit">Create Project</Button>
+        </form>
       </DialogContent>
     </Dialog>
   )
