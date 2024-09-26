@@ -7,12 +7,12 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-  DialogFooter
+  DialogTrigger
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import SubmitButton from '@/components/submit-proj-btn';
 
 import { Plus } from "lucide-react";
 
@@ -55,7 +55,7 @@ const NewProjBtn = () => {
             <Textarea id="description" name="description" placeholder="Project Description (optional)" />
           </div>
 
-          <Button type="submit">Create Project</Button>
+          <SubmitButton />
         </form>
       </DialogContent>
     </Dialog>

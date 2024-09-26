@@ -14,6 +14,7 @@ export async function createProject(formData: FormData) {
     userId
   };
   
-  const newProjectId = await db.insert(projects).values(project).returning({ insertedId: projects.id});
-  console.log(newProjectId);
+  const [newProject] = await db.insert(projects).values(project).returning({ insertedId: projects.id });
+  
+  return newProject.insertedId;
 }
