@@ -1,3 +1,7 @@
+import { Suspense } from 'react';
+
+import Loading from './loading';
+
 export default function UserLayout({
   children
 }: {
@@ -5,7 +9,9 @@ export default function UserLayout({
 }) {
   return (
     <div className="container w-full max-w-screen-xl mx-auto py-20">
-      {children}
+      <Suspense fallback={<Loading />}>
+        {children}
+      </Suspense>
     </div>
   )
 }

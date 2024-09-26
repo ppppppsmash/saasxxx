@@ -5,7 +5,6 @@ import { projects } from '@/db/schema';
 
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
