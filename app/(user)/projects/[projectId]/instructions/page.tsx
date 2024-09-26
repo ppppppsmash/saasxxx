@@ -8,14 +8,18 @@ const page = ({
 
   return (
     <div>
-      <h1>Start Collecting Feedback</h1>
-      <p>Embed the code in our site</p>
-      <code>
-        {/* {`<script src=https:/>/feedback.example.com/feedback.js></script>`}
-        {`<script>Feedback.init("${params.projectId}")</script>`} */}
-        {`<my-widget project="${params.projectId}"></my-widget>`}
-        {`<script src="${process.env.WIDGET_URL}/widget.umd.js"></script>`}
-      </code>
+      <h1 className="text-xl font-bold mb-2">Start Collecting Feedback</h1>
+      <p className="text-lg text-secondary-foreground">Embed the code in our site</p>
+
+      <div className="bg-blue-950 p-6 rounded-md">
+        <code className="text-white">
+          {/* {`<script src=https:/>/feedback.example.com/feedback.js></script>`}
+          {`<script>Feedback.init("${params.projectId}")</script>`} */}
+          {`<my-widget project="${params.projectId}"></my-widget>`}
+          <br />
+          {`<script src="${process.env.WIDGET_URL}/widget.umd.js"></script>`}
+        </code>
+      </div>
     </div>
   )
 }
