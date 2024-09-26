@@ -30,7 +30,7 @@ const ProjectsList = (props: Props) => {
               </CardHeader>
 
               <CardFooter>
-                <Link href={`/dashboard/projects/${project.id}`}>
+                <Link href={`/projects/${project.id}`}>
                   <Button>View Project</Button>
                 </Link>
               </CardFooter>
