@@ -29,7 +29,7 @@ export default async function ProjectPage({
       <div>
         <Link
           href="/dashboard"
-          className="flex items-center text-indigo-700 mb-3"
+          className="flex items-center text-indigo-700 mb-5 w-fit"
         >
           <ChevronLeft className="w-5 h-5 mr-1" />
           <span className="text-lg">
