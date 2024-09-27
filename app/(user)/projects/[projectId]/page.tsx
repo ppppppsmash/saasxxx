@@ -6,6 +6,8 @@ import { projects as dbProjects } from "@/db/schema";
 
 import { Globe } from "lucide-react";
 
+import Table from "@/components/table";
+
 export default async function ProjectPage({
   params
 }: {
@@ -35,6 +37,10 @@ export default async function ProjectPage({
             <span className="text-lg">Visit site</span>
           </Link> : null
         }
+      </div>
+
+      <div>
+        <Table data={project.feedbacks} />
       </div>
     </div>
   )

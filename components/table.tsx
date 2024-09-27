@@ -1,82 +1,74 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+'use client';
 
-import './index.css'
+import React from 'react';
+// import ReactDOM from 'react-dom/client';
 
 import {
   Column,
   ColumnDef,
   PaginationState,
-  Table,
+  Table as TanstackTable,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from '@tanstack/react-table'
+} from '@tanstack/react-table';
 
-import { makeData, Person } from './makeData'
+import { InferSelectModel } from 'drizzle-orm';
+import { feedbacks } from '@/db/schema';
 
-function App() {
-  const rerender = React.useReducer(() => ({}), {})[1]
+import {
+  ChevronRight,
+  ChevronLeft,
+  ChevronsRight,
+  ChevronsLeft,
+  ChevronUp,
+  ChevronDown,
+} from 'lucide-react';
 
-  const columns = React.useMemo<ColumnDef<Person>[]>(
+type Feedback = InferSelectModel<typeof feedbacks>;
+
+function Table(props: { data: Feedback[] }) {
+  // const rerender = React.useReducer(() => ({}), {})[1]
+
+  const columns = React.useMemo<ColumnDef<Feedback>[]>(
     () => [
       {
-        accessorKey: 'firstName',
+        accessorKey: 'userName',
+        header: 'First Name',
         cell: info => info.getValue(),
         footer: props => props.column.id,
       },
       {
-        accessorFn: row => row.lastName,
-        id: 'lastName',
+        accessorFn: row => row.userEmail,
+        id: 'userEmail',
         cell: info => info.getValue(),
-        header: () => <span>Last Name</span>,
+        header: () => <span>Email</span>,
         footer: props => props.column.id,
       },
       {
-        accessorKey: 'age',
-        header: () => 'Age',
+        accessorKey: 'message',
+        header: () => 'Message',
         footer: props => props.column.id,
-      },
-      {
-        accessorKey: 'visits',
-        header: () => <span>Visits</span>,
-        footer: props => props.column.id,
-      },
-      {
-        accessorKey: 'status',
-        header: 'Status',
-        footer: props => props.column.id,
-      },
-      {
-        accessorKey: 'progress',
-        header: 'Profile Progress',
-        footer: props => props.column.id,
+        size: 400,
+        minSize: 200,
+        maxSize: 600,
       },
     ],
     []
   )
 
-  const [data, setData] = React.useState(() => makeData(100000))
-  const refreshData = () => setData(() => makeData(100000))
-
   return (
     <>
       <MyTable
         {...{
-          data,
+          data: props.data,
           columns,
         }}
       />
       <hr />
-      <div>
-        <button onClick={() => rerender()}>Force Rerender</button>
-      </div>
-      <div>
-        <button onClick={() => refreshData()}>Refresh Data</button>
-      </div>
     </>
   )
 }
@@ -85,8 +77,8 @@ function MyTable({
   data,
   columns,
 }: {
-  data: Person[]
-  columns: ColumnDef<Person>[]
+  data: Feedback[]
+  columns: ColumnDef<Feedback>[]
 }) {
   const [pagination, setPagination] = React.useState<PaginationState>({
     pageIndex: 0,
@@ -110,15 +102,22 @@ function MyTable({
   })
 
   return (
-    <div className="p-2">
+    <div className="p-2 mt-5">
       <div className="h-2" />
       <table>
         <thead>
           {table.getHeaderGroups().map(headerGroup => (
-            <tr key={headerGroup.id}>
+            <tr
+              key={headerGroup.id}
+              className="border-b border-slate-300"
+            >
               {headerGroup.headers.map(header => {
                 return (
-                  <th key={header.id} colSpan={header.colSpan}>
+                  <th
+                    key={header.id}
+                    colSpan={header.colSpan}
+                    className="text-left bg-gray-50 rounded-t-md p-4 pb-2"
+                  >
                     <div
                       {...{
                         className: header.column.getCanSort()
@@ -127,17 +126,22 @@ function MyTable({
                         onClick: header.column.getToggleSortingHandler(),
                       }}
                     >
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                      {{
-                        asc: ' 🔼',
-                        desc: ' 🔽',
-                      }[header.column.getIsSorted() as string] ?? null}
+                      <div className="flex items-center gap-2">
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                        {{
+                          asc: <ChevronUp className="w-4 h-4" />,
+                          desc: <ChevronDown className="w-4 h-4" />,
+                        }[header.column.getIsSorted() as string] ?? null}
+                      </div>
                       {header.column.getCanFilter() ? (
-                        <div>
-                          <Filter column={header.column} table={table} />
+                        <div className="mt-2">
+                          <Filter
+                            column={header.column as Column<unknown, unknown>}
+                            table={table as TanstackTable<unknown>}
+                          />
                         </div>
                       ) : null}
                     </div>
@@ -153,7 +157,13 @@ function MyTable({
               <tr key={row.id}>
                 {row.getVisibleCells().map(cell => {
                   return (
-                    <td key={cell.id}>
+                    <td
+                      key={cell.id}
+                      className="p-4 border-b"
+                      style={{
+                        width: cell.column.getSize(),
+                      }}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -169,40 +179,33 @@ function MyTable({
       <div className="h-2" />
       <div className="flex items-center gap-2">
         <button
-          className="border rounded p-1"
+          className="border rounded p-1 bg-gray-50 cursor-pointer"
           onClick={() => table.firstPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          {'<<'}
+          <ChevronsLeft className="w-4 h-4" />
         </button>
         <button
-          className="border rounded p-1"
+          className="border rounded p-1 bg-gray-50 cursor-pointer"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          {'<'}
+          <ChevronLeft className="w-4 h-4" />
         </button>
         <button
-          className="border rounded p-1"
+          className="border rounded p-1 bg-gray-50 cursor-pointer"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-          {'>'}
+          <ChevronRight className="w-4 h-4" />
         </button>
         <button
-          className="border rounded p-1"
+          className="border rounded p-1 bg-gray-50 cursor-pointer"
           onClick={() => table.lastPage()}
           disabled={!table.getCanNextPage()}
         >
-          {'>>'}
+          <ChevronsRight className="w-4 h-4" />
         </button>
-        <span className="flex items-center gap-1">
-          <div>Page</div>
-          <strong>
-            {table.getState().pagination.pageIndex + 1} of{' '}
-            {table.getPageCount().toLocaleString()}
-          </strong>
-        </span>
         <span className="flex items-center gap-1">
           | Go to page:
           <input
@@ -230,11 +233,6 @@ function MyTable({
           ))}
         </select>
       </div>
-      <div>
-        Showing {table.getRowModel().rows.length.toLocaleString()} of{' '}
-        {table.getRowCount().toLocaleString()} Rows
-      </div>
-      <pre>{JSON.stringify(table.getState().pagination, null, 2)}</pre>
     </div>
   )
 }
@@ -243,8 +241,8 @@ function Filter({
   column,
   table,
 }: {
-  column: Column<any, any>
-  table: Table<any>
+  column: Column<unknown, unknown>
+  table: TanstackTable<unknown>
 }) {
   const firstValue = table
     .getPreFilteredRowModel()
@@ -281,7 +279,7 @@ function Filter({
     </div>
   ) : (
     <input
-      className="w-36 border shadow rounded"
+      className="w-36 border shadow rounded p-1 text-slate-800 font-thin"
       onChange={e => column.setFilterValue(e.target.value)}
       onClick={e => e.stopPropagation()}
       placeholder={`Search...`}
@@ -291,11 +289,4 @@ function Filter({
   )
 }
 
-const rootElement = document.getElementById('root')
-if (!rootElement) throw new Error('Failed to find the root element')
-
-ReactDOM.createRoot(rootElement).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-)
+export default Table;
