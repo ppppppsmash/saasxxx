@@ -4,7 +4,7 @@ import { db } from "@/db";
 import { eq } from "drizzle-orm";
 import { projects as dbProjects } from "@/db/schema";
 
-import { Globe } from "lucide-react";
+import { ChevronLeft, Globe } from "lucide-react";
 
 import Table from "@/components/table";
 
@@ -26,6 +26,18 @@ export default async function ProjectPage({
 
   return (
     <div>
+      <div>
+        <Link
+          href="/dashboard"
+          className="flex items-center text-indigo-700 mb-3"
+        >
+          <ChevronLeft className="w-5 h-5 mr-1" />
+          <span className="text-lg">
+            Back to projects
+          </span>
+        </Link>
+      </div>
+
       <div className="flex justify-between items-start">
         <div className="proj-info">
           <h1 className="text-3xl font-bold mb-3">{project.name}</h1>

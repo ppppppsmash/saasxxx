@@ -104,7 +104,7 @@ function MyTable({
   return (
     <div className="p-2 mt-5">
       <div className="h-2" />
-      <table>
+      <table className="w-full">
         <thead>
           {table.getHeaderGroups().map(headerGroup => (
             <tr
