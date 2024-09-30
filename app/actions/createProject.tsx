@@ -17,5 +17,5 @@ export async function createProject(formData: FormData) {
   
   const [newProject] = await db.insert(projects).values(project).returning({ insertedId: projects.id });
   
-  redirect(`/projects/instructions/${newProject.insertedId}`);
+  redirect(`/projects/${newProject.insertedId}/instructions/`);
 }

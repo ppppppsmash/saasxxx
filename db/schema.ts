@@ -16,10 +16,10 @@ export const projectsRelations = relations(projects, ({ many }) => ({
 export const feedbacks = pgTable('feedbacks', {
   id: serial('id').primaryKey(),
   projectId: integer('project_id'),
-  feedback: text('feedback'),
   userName: text('user_name'),
   userEmail: text('user_email'),
   message: text('message'),
+  rating: integer('rating'),
 });
 
 export const feedbacksRelations = relations(feedbacks, ({ one }) => ({
