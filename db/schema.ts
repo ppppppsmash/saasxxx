@@ -1,4 +1,4 @@
-import { pgTable, serial, text, varchar, integer } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, varchar, integer, timestamp, boolean } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
 export const projects = pgTable('projects', {
@@ -20,6 +20,7 @@ export const feedbacks = pgTable('feedbacks', {
   userEmail: text('user_email'),
   message: text('message'),
   rating: integer('rating'),
+  createdAt: timestamp('created_at').defaultNow()
 });
 
 export const feedbacksRelations = relations(feedbacks, ({ one }) => ({
@@ -28,3 +29,20 @@ export const feedbacksRelations = relations(feedbacks, ({ one }) => ({
     references: [projects.id]
   })
 }));
+
+export const subscriptions = pgTable('subscriptions', {
+  id: serial('id').primaryKey(),
+  userId: varchar('user_id'),
+  stripeCustomerId: text('stripe_customer_id'),
+  stripeSubscriptionId: text('stripe_subscription_id'),
+  subscribed: boolean('subscribed').default(false),
+  projectId: integer('project_id'),
+  createdAt: timestamp('created_at').defaultNow()
+});
+
+// export const subscriptionsRelations = relations(subscriptions, ({ one }) => ({
+//   project: one(projects, {
+//     fields: [subscriptions.projectId],
+//     references: [projects.id]
+//   })
+// }));
