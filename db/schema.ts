@@ -36,7 +36,7 @@ export const subscriptions = pgTable('subscriptions', {
   stripeCustomerId: text('stripe_customer_id'),
   stripeSubscriptionId: text('stripe_subscription_id'),
   subscribed: boolean('subscribed').default(false),
-  projectId: integer('project_id'),
+//  projectId: integer('project_id'),
   createdAt: timestamp('created_at').defaultNow()
 });
 
