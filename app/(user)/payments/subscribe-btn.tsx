@@ -51,6 +51,7 @@ const SubscribeBtn = ({ price } : Props) => {
     <Button
       onClick={() => handleCheckout(price)}
       disabled={loading}
+      className="bg-indigo-700"
     >
       {loading ? <>
         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
