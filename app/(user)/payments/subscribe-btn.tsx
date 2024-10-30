@@ -47,7 +47,6 @@ const SubscribeBtn = ({ price } : Props) => {
   }
 
   return (
-    
     <Button
       onClick={() => handleCheckout(price)}
       disabled={loading}

@@ -3,6 +3,8 @@ import { db } from '@/db';
 import { subscriptions } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
+import ManageSubscription from './manage-subscription';
+
 const page = async () => {
   const { userId } = await auth();
 
@@ -20,6 +22,8 @@ const page = async () => {
     <div className="p-4 border rounded-md">
       <h1 className="text-4xl mb-3">Subscription Details</h1>
       <p className="mb-2 text-lg">Your current plan is: {plan}</p>
+
+      <ManageSubscription />
     </div>
   )
 };

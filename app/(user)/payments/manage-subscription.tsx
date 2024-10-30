@@ -4,13 +4,47 @@ import { getStripe } from '@/lib/stripe-client';
 import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Router } from 'lucide-react';
 
 const ManageSubscription = () => {
+  const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const redirectToCustomerPortal = async() => {
+    setLoading(true);
+
+    try {
+      const { url } = await fetch('/api/stripe/create-portal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then((res) => res.json());
+
+      router.push(url);
+    } catch (error) {
+      console.error(error);
+    }
+
+    setLoading(false);
+  }
+
+  if (error) {
+    return <p>{error}</p>
+  }
   return (
-    <div>
-      <h1 className="text-4xl mb-3">Manage Subscription</h1>
-    </div>
+    <Button
+      onClick={() => redirectToCustomerPortal}
+      disabled={loading}
+      className="bg-indigo-700"
+    >
+      {loading ? <>
+        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          Please Wait
+        </> : "Modify Your Subscription"
+      }
+    </Button>
   )
 };
 
