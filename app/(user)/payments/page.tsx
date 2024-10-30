@@ -14,9 +14,12 @@ const page = async () => {
     where: eq(subscriptions.userId, userId)
   });
 
+  const plan = subscription && subscription.subscribed ? 'premium' : 'free';
+
   return (
-    <div>
-      <h1>Subscription Details</h1>
+    <div className="p-4 border rounded-md">
+      <h1 className="text-4xl mb-3">Subscription Details</h1>
+      <p className="mb-2 text-lg">Your current plan is: {plan}</p>
     </div>
   )
 };
