@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 
 import { getStripe } from '@/lib/stripe-client';
 import { Loader2 } from 'lucide-react';
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const SubscribeBtn = ({ price } : Props) => {
-  const router = useRouter();
+  // const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -36,6 +36,7 @@ const SubscribeBtn = ({ price } : Props) => {
         stripe.redirectToCheckout({ sessionId });
       }
     } catch (error) {
+      setError('error');
       console.error(error);
     }
 

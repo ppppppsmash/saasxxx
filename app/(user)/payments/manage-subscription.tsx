@@ -1,10 +1,10 @@
 'use client';
 import { useState } from 'react';
-import { getStripe } from '@/lib/stripe-client';
+// import { getStripe } from '@/lib/stripe-client';
 import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
-import { Loader2, Router } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 
 const ManageSubscription = () => {
   const router = useRouter();
@@ -26,6 +26,7 @@ const ManageSubscription = () => {
 
       router.push(url.url);
     } catch (error) {
+      setError('error');
       console.error(error);
     }
 
