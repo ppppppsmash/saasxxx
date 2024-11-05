@@ -1,10 +1,67 @@
+import PricingCard from "./pricing-card";
+
+export type PricingPlan = {
+  title: string;
+  price: number;
+  description: string;
+  isPopular: boolean;
+  features: string[];
+}
+
+export const pricingPlans: PricingPlan[] = [
+  {
+    title: 'Free',
+    price: 0,
+    description: 'For small teams just getting started',
+    isPopular: false,
+    features: [
+      '3 projects',
+      'Unlimited users',
+      '2GB storage',
+      'Priority support',
+    ],
+  },
+  {
+    title: 'Monthly',
+    price: 6.99,
+    description: 'For growing teams',
+    isPopular: true,
+    features: [
+      'Unlimited projects',
+      'Unlimited users',
+      '5GB storage',
+      'Priority support',
+    ],
+  },
+  {
+    title: 'Yearly',
+    price: 39.99,
+    description: 'Upgarade to save more!',
+    isPopular: true,
+    features: [
+      'Unlimited projects',
+      'Unlimited users',
+      '50GB storage',
+      '24/7 support',
+    ],
+  }
+];
+
 const PricingSection = () => {
   return (
-    <div>
-      <h1>Pricing</h1>
-      <h2>
+    <div className="text-center">
+      <h1 className="capitalize text-3xl">Pricing</h1>
+      <h2 className="font-extrabold text-3xl mb-8 pt-3">
         Flexible Pricing to Fit Your Needs
       </h2>
+
+      <div>
+        {
+          pricingPlans.map((plan, index) => (
+            <PricingCard key={index} {...plan} />
+          ))
+        }
+      </div>
     </div>
   )
 }
