@@ -55,7 +55,7 @@ const PricingSection = () => {
         Flexible Pricing to Fit Your Needs
       </h2>
 
-      <div>
+      <div className="mt-10 grid items-center grid-cols-1 gap-3 md:grid-cols-3 max-w-screen-xl">
         {
           pricingPlans.map((plan, index) => (
             <PricingCard key={index} {...plan} />
