@@ -28,7 +28,7 @@ export const pricingPlans: PricingPlan[] = [
     price: 6.99,
     description: 'For growing teams',
     isPopular: true,
-    url: '',
+    url: '/payments/subscribe?plan=monthly',
     features: [
       'Unlimited projects',
       'Unlimited users',
@@ -41,7 +41,7 @@ export const pricingPlans: PricingPlan[] = [
     price: 39.99,
     description: 'Upgarade to save more!',
     isPopular: true,
-    url: '',
+    url: '/payments/subscribe?plan=yearly',
     features: [
       'Unlimited projects',
       'Unlimited users',
