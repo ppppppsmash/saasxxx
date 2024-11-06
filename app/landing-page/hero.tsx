@@ -11,10 +11,10 @@ import { Button } from '@/components/ui/button';
 const Hero = () => {
   return (
     <section className="grow">
-      <div>
-        <div>
-          <h1>Collect your feedback seamlessly</h1>
-          <p>Easily integrate Kurosawa and start collecting feedback today.</p>
+      <div className="container mx-auto px-4 my-24">
+        <div className="max-w-sm mb-8">
+          <h1 className="mb-5 text-5xl font-extrabold leading-tight">Collect your feedback seamlessly</h1>
+          <p className="text-gray-500 text-lg">Easily integrate Kurosawa and start collecting feedback today.</p>
         </div>
         <div>
           <SignedOut>
