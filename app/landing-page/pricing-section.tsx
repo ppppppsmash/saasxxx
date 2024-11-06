@@ -40,7 +40,7 @@ export const pricingPlans: PricingPlan[] = [
     title: 'Yearly',
     price: 39.99,
     description: 'Upgarade to save more!',
-    isPopular: true,
+    isPopular: false,
     url: '/payments/subscribe?plan=yearly',
     features: [
       'Unlimited projects',
