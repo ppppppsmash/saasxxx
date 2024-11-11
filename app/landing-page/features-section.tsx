@@ -13,6 +13,18 @@ const features = [
     title: 'Analytics',
     description: 'Track and analyze feedback to make informed decisions.',
   },
+  {
+    title: 'Secure',
+    description: 'Your data is safe and secure with this.',
+  },
+  {
+    title: 'Scalable',
+    description: 'Grow your business with this as you scale.',
+  },
+  {
+    title: 'Fast Support',
+    description: 'Get help when you need it with our fast support team.',
+  },
 ];
 
 const FeaturesSection = () => {
